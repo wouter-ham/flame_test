@@ -16,7 +16,7 @@ abstract class Tower extends CircleComponent with HasWorldReference<MyWorld> {
   Tower({required super.position, required this.strategy, required this.fireInterval, required this.range})
     : super(
         radius: Config.radius,
-        anchor: Anchor.topLeft,
+        anchor: Anchor.center,
         paint:
             Paint()
               ..color = const Color(0xff2da100)
