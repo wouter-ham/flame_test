@@ -15,10 +15,9 @@ class Projectile extends CircleComponent with CollisionCallbacks {
     required this.speed,
     required this.damage,
     required this.target,
-    double radius = Config.ballRadius,
+    super.radius = Config.radius,
     this.strategy = TargetingStrategy.closest,
   }) : super(
-         radius: radius,
          anchor: Anchor.center,
          paint:
              Paint()
@@ -36,16 +35,18 @@ class Projectile extends CircleComponent with CollisionCallbacks {
       return;
     }
 
-    position += (target.position - position) * speed * dt;
+    final Vector2 difference = target.position - position;
+    final double distance = difference.length;
+
+    final Vector2 direction = difference / distance;
+    position += direction * speed * dt;
   }
 
   @override
   void onCollisionStart(Set<Vector2> intersectionPoints, PositionComponent other) {
     super.onCollisionStart(intersectionPoints, other);
-    if (other is Npc) {
+    if (other is Npc || other is SafeArea) {
       removeFromParent();
-    } else {
-      debugPrint('collision with $other');
     }
   }
 }

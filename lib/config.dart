@@ -1,5 +1,5 @@
 class Config {
-  static const double ballRadius = 4;
+  static const double radius = 4;
   static const int gridSize = 25;
 }
 
