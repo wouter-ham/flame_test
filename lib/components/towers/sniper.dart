@@ -4,14 +4,14 @@ import 'package:flame_test/components/npc.dart';
 import 'package:flame_test/components/projectiles/bullet.dart';
 import 'package:flame_test/components/towers/index.dart';
 
-class Turret extends Tower {
-  Turret({required super.position, required super.strategy})
+class Sniper extends Tower {
+  Sniper({required super.position, required super.strategy})
     : super(
-        fireInterval: 2,
-        range: 200,
+        fireInterval: 5,
+        range: null,
         paint:
             Paint()
-              ..color = const Color(0xff2da100)
+              ..color = const Color(0xff00d9de)
               ..style = PaintingStyle.fill,
       );
 
@@ -23,6 +23,6 @@ class Turret extends Tower {
       return;
     }
 
-    world.add(Bullet(position: position, target: target));
+    world.add(Bullet(position: position, target: target, damage: 5));
   }
 }

@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flame_test/components/index.dart';
@@ -10,19 +8,16 @@ import 'package:flame_test/world.dart';
 abstract class Tower extends CircleComponent with HasWorldReference<MyWorld> {
   final TargetingStrategy strategy;
   final double fireInterval;
-  final double range;
+  final double? range;
   double lastFire = 0;
 
-  Tower({required super.position, required this.strategy, required this.fireInterval, required this.range})
-    : super(
-        radius: Config.radius,
-        anchor: Anchor.center,
-        paint:
-            Paint()
-              ..color = const Color(0xff2da100)
-              ..style = PaintingStyle.fill,
-        children: <Component>[CircleHitbox()],
-      );
+  Tower({
+    required super.position,
+    required this.strategy,
+    required this.fireInterval,
+    required this.range,
+    required super.paint,
+  }) : super(radius: Config.radius, anchor: Anchor.center, children: <Component>[CircleHitbox()]);
 
   Npc? getTarget() {
     final Iterable<Npc> npcs = world.children.whereType<Npc>();
