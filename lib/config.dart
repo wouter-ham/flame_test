@@ -3,4 +3,4 @@ class Config {
   static const int gridSize = 25;
 }
 
-enum TargetingStrategy { closest, strongest }
+enum TargetingStrategy { closest, weakest, strongest }

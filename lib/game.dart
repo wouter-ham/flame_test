@@ -37,6 +37,6 @@ class MyGame extends FlameGame<MyWorld>
 
     world.addAll(List<Npc>.generate(10, (int index) => Npc.random(size)));
 
-    world.add(Turret(position: size / 2, strategy: TargetingStrategy.closest));
+    world.add(Turret(position: size / 2, strategy: TargetingStrategy.strongest));
   }
 }
