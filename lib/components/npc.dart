@@ -2,6 +2,7 @@ import 'dart:math' as math;
 
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
+import 'package:flame/particles.dart';
 import 'package:flame_test/components/index.dart';
 import 'package:flame_test/config.dart';
 import 'package:flame_test/game.dart';
@@ -13,7 +14,7 @@ class Npc extends CircleComponent with HasGameReference<MyGame>, CollisionCallba
   Npc({required super.position, required this.health, double radius = Config.radius})
     : super(
         radius: radius,
-        anchor: Anchor.topLeft,
+        anchor: Anchor.center,
         paint:
             Paint()
               ..color = const Color(0xffa60827)
@@ -24,7 +25,7 @@ class Npc extends CircleComponent with HasGameReference<MyGame>, CollisionCallba
   Npc.random(Vector2 size)
     : super(
         radius: Config.radius,
-        anchor: Anchor.topLeft,
+        anchor: Anchor.center,
         paint:
             Paint()
               ..color = const Color(0xffa60827)
@@ -46,5 +47,17 @@ class Npc extends CircleComponent with HasGameReference<MyGame>, CollisionCallba
     } else {
       debugPrint('collision with $other');
     }
+  }
+
+  @override
+  void onRemove() {
+    super.onRemove();
+
+    game.world.add(
+      ParticleSystemComponent(
+        position: position,
+        particle: Particle.generate(generator: (int i) => CircleParticle(paint: Paint()..color = Colors.red)),
+      ),
+    );
   }
 }
