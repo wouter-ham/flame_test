@@ -3,7 +3,7 @@ import 'package:flame_test/components/projectiles/bullet.dart';
 import 'package:flame_test/components/towers/index.dart';
 
 class Turret extends Tower {
-  Turret({required super.position, required super.strategy}) : super(fireInterval: 5);
+  Turret({required super.position, required super.strategy}) : super(fireInterval: 2);
 
   @override
   void fire() {
