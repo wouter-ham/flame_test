@@ -7,7 +7,7 @@ import 'package:flame_test/config.dart';
 import 'package:flame_test/helpers/targeting.helper.dart';
 import 'package:flame_test/world.dart';
 
-class Tower extends CircleComponent with HasWorldReference<MyWorld> {
+abstract class Tower extends CircleComponent with HasWorldReference<MyWorld> {
   final TargetingStrategy strategy;
   final double fireInterval;
   double lastFire = 0;
@@ -42,5 +42,5 @@ class Tower extends CircleComponent with HasWorldReference<MyWorld> {
     fire();
   }
 
-  void fire() {}
+  void fire();
 }
