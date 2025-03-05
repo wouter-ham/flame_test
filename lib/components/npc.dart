@@ -6,6 +6,7 @@ import 'package:flame/particles.dart';
 import 'package:flame_test/components/index.dart';
 import 'package:flame_test/config.dart';
 import 'package:flame_test/game.dart';
+import 'package:flame_test/misc/fade_out_particle.dart';
 import 'package:flutter/material.dart';
 
 class Npc extends CircleComponent with HasGameReference<MyGame>, CollisionCallbacks {
@@ -55,8 +56,17 @@ class Npc extends CircleComponent with HasGameReference<MyGame>, CollisionCallba
 
     game.world.add(
       ParticleSystemComponent(
+        anchor: Anchor.topLeft,
         position: position,
-        particle: Particle.generate(generator: (int i) => CircleParticle(paint: Paint()..color = Colors.red)),
+        particle: Particle.generate(
+          generator:
+              (int i) => MovingParticle(
+                to: Vector2((math.Random().nextDouble() - .5) * 20, (math.Random().nextDouble() - .5) * 20),
+                child: FadeOutParticle(radius: 2, paint: Paint()..color = Colors.red),
+                curve: Curves.easeOut,
+                lifespan: .2,
+              ),
+        ),
       ),
     );
   }

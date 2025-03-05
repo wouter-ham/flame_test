@@ -9,7 +9,6 @@ import 'package:flame_test/components/towers/index.dart';
 import 'package:flame_test/config.dart';
 import 'package:flame_test/world.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 
 class MyGame extends FlameGame<MyWorld>
     with SingleGameInstance, HasPerformanceTracker, HasCollisionDetection<Broadphase<ShapeHitbox>> {
@@ -27,7 +26,7 @@ class MyGame extends FlameGame<MyWorld>
   @override
   void onLoad() {
     super.onLoad();
-    debugMode = kDebugMode;
+    // debugMode = kDebugMode;
 
     camera.viewfinder.anchor = Anchor.topLeft;
 
@@ -37,6 +36,6 @@ class MyGame extends FlameGame<MyWorld>
 
     world.addAll(List<Npc>.generate(10, (int index) => Npc.random(size)));
 
-    world.add(Turret(position: size / 2, strategy: TargetingStrategy.strongest));
+    world.add(Turret(position: size / 2, strategy: TargetingStrategy.closest));
   }
 }
