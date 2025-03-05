@@ -35,10 +35,7 @@ class MyGame extends FlameGame<MyWorld>
 
     add(FpsComponent());
 
-    final Npc npc1 = Npc(position: Vector2(width * rand.nextDouble(), height * rand.nextDouble()), health: 10);
-    final Npc npc2 = Npc(position: Vector2(width * rand.nextDouble(), height * rand.nextDouble()), health: 8);
-
-    world.addAll(<Npc>[npc1, npc2]);
+    world.addAll(List<Npc>.generate(10, (int index) => Npc.random(size)));
 
     world.add(Turret(position: size / 2, strategy: TargetingStrategy.closest));
   }
