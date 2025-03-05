@@ -4,7 +4,7 @@ import 'package:flame_test/components/index.dart';
 import 'package:flame_test/config.dart';
 import 'package:flutter/material.dart';
 
-class Projectile extends CircleComponent with CollisionCallbacks {
+abstract class Projectile extends CircleComponent with CollisionCallbacks {
   double speed;
   double damage;
   Npc target;
