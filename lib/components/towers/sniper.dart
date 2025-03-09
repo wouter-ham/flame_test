@@ -1,6 +1,6 @@
 import 'dart:ui';
 
-import 'package:flame_test/components/npc.dart';
+import 'package:flame_test/components/npc/npc.dart';
 import 'package:flame_test/components/projectiles/bullet.dart';
 import 'package:flame_test/components/towers/index.dart';
 

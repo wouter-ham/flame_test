@@ -1,4 +1,4 @@
-import 'package:flame_test/components/npc.dart';
+import 'package:flame_test/components/npc/npc.dart';
 import 'package:flame_test/components/towers/tower.dart';
 
 class TargetingHelper {

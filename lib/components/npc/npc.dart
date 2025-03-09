@@ -9,7 +9,7 @@ import 'package:flame_test/game.dart';
 import 'package:flame_test/misc/fade_out_particle.dart';
 import 'package:flutter/material.dart';
 
-class Npc extends CircleComponent with HasGameReference<MyGame>, CollisionCallbacks {
+abstract class Npc extends CircleComponent with HasGameReference<MyGame>, CollisionCallbacks {
   double health = 10;
 
   Npc({required super.position, required this.health, double radius = Config.radius})
