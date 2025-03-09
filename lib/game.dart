@@ -5,6 +5,7 @@ import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flame/game.dart';
 import 'package:flame_test/components/index.dart';
+import 'package:flame_test/components/npc/person.dart';
 import 'package:flame_test/config.dart';
 import 'package:flame_test/world.dart';
 import 'package:flutter/cupertino.dart';
@@ -33,7 +34,7 @@ class MyGame extends FlameGame<MyWorld>
 
     add(FpsComponent());
 
-    world.addAll(List<Npc>.generate(10, (int index) => Npc.random(size)));
+    world.addAll(List<Npc>.generate(10, (int index) => Person.random(size)));
 
     world.add(Turret(position: (size / 2)..sub(Vector2.all(50)), strategy: TargetingStrategy.closest));
     world.add(Sniper(position: (size / 2)..add(Vector2.all(50)), strategy: TargetingStrategy.strongest));

@@ -20,7 +20,7 @@ abstract class Tower extends CircleComponent with HasWorldReference<MyWorld> {
   }) : super(radius: Config.radius, anchor: Anchor.center, children: <Component>[CircleHitbox()]);
 
   Npc? getTarget() {
-    final Iterable<Npc> npcs = world.children.whereType<Npc>();
+    final Iterable<Npc> npcs = world.children.query<Npc>();
 
     return switch (strategy) {
       TargetingStrategy.closest => TargetingHelper.findClosestNpc(this, npcs.toList()),
