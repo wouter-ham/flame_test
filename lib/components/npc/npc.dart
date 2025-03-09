@@ -1,22 +1,25 @@
+import 'dart:async';
 import 'dart:math' as math;
+import 'dart:ui' as ui;
 
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
+import 'package:flame/extensions.dart';
+import 'package:flame/flame.dart';
 import 'package:flame/particles.dart';
 import 'package:flame_test/components/index.dart';
-import 'package:flame_test/config.dart';
+import 'package:flame_test/components/npc/person.dart';
 import 'package:flame_test/game.dart';
 import 'package:flame_test/helpers/index.dart';
-import 'package:flame_test/misc/fade_out_particle.dart';
+import 'package:flame_test/misc/index.dart';
 import 'package:flutter/material.dart';
 
-abstract class Npc extends CircleComponent with HasGameReference<MyGame>, CollisionCallbacks {
+abstract class Npc extends SpriteComponent with HasGameReference<MyGame>, CollisionCallbacks {
   late final double speed;
   double health = 10;
 
-  Npc({required super.position, required this.health, required this.speed, double radius = Config.radius})
+  Npc({required super.position, required this.health, required this.speed})
     : super(
-        radius: radius,
         anchor: Anchor.center,
         paint:
             Paint()
@@ -27,7 +30,6 @@ abstract class Npc extends CircleComponent with HasGameReference<MyGame>, Collis
 
   Npc.random(Vector2 size)
     : super(
-        radius: Config.radius,
         anchor: Anchor.center,
         paint:
             Paint()
@@ -41,12 +43,31 @@ abstract class Npc extends CircleComponent with HasGameReference<MyGame>, Collis
   }
 
   @override
+  Future<void> onLoad() async {
+    final ui.Image image = await Flame.images.load('person.png');
+
+    final double aspectRatio = image.height / image.width;
+
+    final Vector2 size = Vector2(50, 50 * aspectRatio);
+
+    await image.resize(size);
+
+    print(image);
+
+    print('image AR: $aspectRatio, $size');
+
+    sprite = Sprite(image, srcSize: size, srcPosition: position);
+
+    return super.onLoad();
+  }
+
+  @override
   void update(double dt) {
     super.update(dt);
 
-    final Vector2 direction = PathfindingHelper.getVelocity(position, game.path);
+    final Vector2 velocity = PathfindingHelper.getVelocity(position, game.path);
 
-    position += direction * speed * dt;
+    position += velocity * speed * dt;
   }
 
   @override
@@ -57,8 +78,8 @@ abstract class Npc extends CircleComponent with HasGameReference<MyGame>, Collis
       if (health < 0) {
         removeFromParent();
       }
-    } else {
-      debugPrint('collision with $other');
+    } else if (other is! Person) {
+      debugPrint('Collision with $other');
     }
   }
 

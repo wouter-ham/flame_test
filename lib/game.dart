@@ -16,19 +16,17 @@ class MyGame extends FlameGame<MyWorld>
 
   double get width => size.x;
   double get height => size.y;
-  double get rows => size.y / Config.gridSize;
-  double get cols => size.x / Config.gridSize;
   final math.Random rand = math.Random();
 
   final List<Vector2> path = <Vector2>[
-    Vector2(0, 0),
-    Vector2(0, 100),
+    Vector2(10, 0),
+    Vector2(10, 100),
     Vector2(100, 100),
-    Vector2(100, 0),
-    Vector2(200, 0),
+    Vector2(100, 10),
+    Vector2(200, 10),
     Vector2(200, 100),
     Vector2(300, 100),
-    Vector2(300, 0),
+    Vector2(300, 10),
   ];
 
   @override
