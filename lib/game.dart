@@ -20,6 +20,17 @@ class MyGame extends FlameGame<MyWorld>
   double get cols => size.x / Config.gridSize;
   final math.Random rand = math.Random();
 
+  final List<Vector2> path = <Vector2>[
+    Vector2(0, 0),
+    Vector2(0, 100),
+    Vector2(100, 100),
+    Vector2(100, 0),
+    Vector2(200, 0),
+    Vector2(200, 100),
+    Vector2(300, 100),
+    Vector2(300, 0),
+  ];
+
   @override
   Color backgroundColor() => const Color(0xFF000000);
 
@@ -34,7 +45,12 @@ class MyGame extends FlameGame<MyWorld>
 
     add(FpsComponent());
 
-    world.addAll(List<Npc>.generate(10, (int index) => Person.random(size)));
+    world.addAll(
+      List<Npc>.generate(
+        10,
+        (int index) => Person(position: path.first..add(Vector2.all(math.Random().nextInt(5).toDouble()))),
+      ),
+    );
 
     world.add(Turret(position: (size / 2)..sub(Vector2.all(50)), strategy: TargetingStrategy.closest));
     world.add(Sniper(position: (size / 2)..add(Vector2.all(50)), strategy: TargetingStrategy.strongest));
