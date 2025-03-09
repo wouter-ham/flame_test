@@ -6,13 +6,15 @@ import 'package:flame/particles.dart';
 import 'package:flame_test/components/index.dart';
 import 'package:flame_test/config.dart';
 import 'package:flame_test/game.dart';
+import 'package:flame_test/helpers/index.dart';
 import 'package:flame_test/misc/fade_out_particle.dart';
 import 'package:flutter/material.dart';
 
 abstract class Npc extends CircleComponent with HasGameReference<MyGame>, CollisionCallbacks {
+  late final double speed;
   double health = 10;
 
-  Npc({required super.position, required this.health, double radius = Config.radius})
+  Npc({required super.position, required this.health, required this.speed, double radius = Config.radius})
     : super(
         radius: radius,
         anchor: Anchor.center,
@@ -35,6 +37,16 @@ abstract class Npc extends CircleComponent with HasGameReference<MyGame>, Collis
       ) {
     position = Vector2(size.x * math.Random().nextDouble(), size.y * math.Random().nextDouble());
     health = math.Random().nextInt(10) + 1;
+    speed = math.Random().nextInt(10).toDouble();
+  }
+
+  @override
+  void update(double dt) {
+    super.update(dt);
+
+    final Vector2 direction = PathfindingHelper.getVelocity(position, game.path);
+
+    position += direction * speed * dt;
   }
 
   @override
