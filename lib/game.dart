@@ -1,14 +1,17 @@
 import 'dart:math' as math;
+import 'dart:ui' as ui;
 import 'dart:ui';
 
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flame/game.dart';
 import 'package:flame_test/components/index.dart';
+import 'package:flame_test/components/npc/chopper.dart';
 import 'package:flame_test/components/npc/person.dart';
 import 'package:flame_test/config.dart';
 import 'package:flame_test/world.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 
 class MyGame extends FlameGame<MyWorld>
     with SingleGameInstance, HasPerformanceTracker, HasCollisionDetection<Broadphase<ShapeHitbox>> {
@@ -18,8 +21,8 @@ class MyGame extends FlameGame<MyWorld>
   double get height => size.y;
   final math.Random rand = math.Random();
 
-  final List<Vector2> path = <Vector2>[
-    Vector2(10, 0),
+  final List<Vector2> testPath = <Vector2>[
+    Vector2(10, 10),
     Vector2(10, 100),
     Vector2(100, 100),
     Vector2(100, 10),
@@ -29,13 +32,33 @@ class MyGame extends FlameGame<MyWorld>
     Vector2(300, 10),
   ];
 
+  late final Path path;
+  late final double pathLength;
+
   @override
   Color backgroundColor() => const Color(0xFF000000);
 
   @override
   void onLoad() {
     super.onLoad();
-    // debugMode = kDebugMode;
+    debugMode = kDebugMode;
+
+    path = Path()..moveTo(testPath.first.x, testPath.first.y);
+    for (int i = 1; i < testPath.length; i++) {
+      final Vector2 previousPoint = testPath[i - 1];
+      final Vector2 currentPoint = testPath[i];
+      path.quadraticBezierTo(
+        previousPoint.x,
+        previousPoint.y,
+        (previousPoint.x + currentPoint.x) / 2,
+        (previousPoint.y + currentPoint.y) / 2,
+      );
+    }
+
+    pathLength = path
+        .computeMetrics()
+        .map((ui.PathMetric metric) => metric.length)
+        .reduce((double length, double total) => length + total);
 
     camera.viewfinder.anchor = Anchor.topLeft;
 
@@ -45,12 +68,19 @@ class MyGame extends FlameGame<MyWorld>
 
     world.addAll(
       List<Npc>.generate(
-        10,
-        (int index) => Person(position: path.first..add(Vector2.all(math.Random().nextInt(5).toDouble()))),
+        5,
+        (int index) => Person(position: testPath.first..add(Vector2.all(math.Random().nextInt(15).toDouble()))),
+      ),
+    );
+    world.addAll(
+      List<Npc>.generate(
+        5,
+        (int index) => Chopper(position: testPath.first..add(Vector2.all(math.Random().nextInt(15).toDouble()))),
       ),
     );
 
     world.add(Turret(position: (size / 2)..sub(Vector2.all(50)), strategy: TargetingStrategy.closest));
-    world.add(Sniper(position: (size / 2)..add(Vector2.all(50)), strategy: TargetingStrategy.strongest));
+    // world.add(Sniper(position: size / 2, strategy: TargetingStrategy.flying));
+    world.add(Sniper(position: (size / 2)..add(Vector2.all(50)), strategy: TargetingStrategy.furthestOnPath));
   }
 }

@@ -4,21 +4,25 @@ import 'dart:ui' as ui;
 
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
+import 'package:flame/effects.dart';
 import 'package:flame/extensions.dart';
 import 'package:flame/flame.dart';
 import 'package:flame/particles.dart';
 import 'package:flame_test/components/index.dart';
 import 'package:flame_test/components/npc/person.dart';
+import 'package:flame_test/config.dart';
 import 'package:flame_test/game.dart';
-import 'package:flame_test/helpers/index.dart';
 import 'package:flame_test/misc/index.dart';
 import 'package:flutter/material.dart';
 
 abstract class Npc extends SpriteComponent with HasGameReference<MyGame>, CollisionCallbacks {
   late final double speed;
+  late final TravelType travelType;
   double health = 10;
 
-  Npc({required super.position, required this.health, required this.speed})
+  late final MoveAlongPathEffect moveEffect;
+
+  Npc({required super.position, required this.health, required this.speed, required this.travelType})
     : super(
         anchor: Anchor.center,
         paint:
@@ -40,6 +44,15 @@ abstract class Npc extends SpriteComponent with HasGameReference<MyGame>, Collis
     position = Vector2(size.x * math.Random().nextDouble(), size.y * math.Random().nextDouble());
     health = math.Random().nextInt(10) + 1;
     speed = math.Random().nextInt(10).toDouble();
+    travelType = math.Random().nextBool() ? TravelType.flying : TravelType.ground;
+  }
+
+  double? get progress {
+    if (!moveEffect.isMounted) {
+      return null;
+    }
+
+    return moveEffect.controller.progress;
   }
 
   @override
@@ -58,16 +71,30 @@ abstract class Npc extends SpriteComponent with HasGameReference<MyGame>, Collis
 
     sprite = Sprite(image, srcSize: size, srcPosition: position);
 
+    moveEffect = MoveAlongPathEffect(
+      game.path,
+      EffectController(duration: game.pathLength / 100 * (100 / speed)),
+      absolute: true,
+      oriented: true,
+    );
+
+    add(moveEffect);
+
     return super.onLoad();
   }
 
   @override
-  void update(double dt) {
+  Future<void> update(double dt) async {
     super.update(dt);
 
-    final Vector2 velocity = PathfindingHelper.getVelocity(position, game.path);
+    await moveEffect.mounted;
 
-    position += velocity * speed * dt;
+    if (!moveEffect.isMounted || moveEffect.controller.completed) {
+      removeFromParent();
+      return;
+    }
+
+    moveEffect.controller.advance(dt);
   }
 
   @override
