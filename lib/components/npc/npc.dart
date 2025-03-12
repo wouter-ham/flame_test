@@ -9,7 +9,6 @@ import 'package:flame/extensions.dart';
 import 'package:flame/flame.dart';
 import 'package:flame/particles.dart';
 import 'package:flame_test/components/index.dart';
-import 'package:flame_test/components/npc/person.dart';
 import 'package:flame_test/config.dart';
 import 'package:flame_test/game.dart';
 import 'package:flame_test/misc/index.dart';
@@ -61,21 +60,16 @@ abstract class Npc extends SpriteComponent with HasGameReference<MyGame>, Collis
 
     final double aspectRatio = image.height / image.width;
 
-    final Vector2 size = Vector2(50, 50 * aspectRatio);
-
-    await image.resize(size);
-
-    print(image);
-
-    print('image AR: $aspectRatio, $size');
-
-    sprite = Sprite(image, srcSize: size, srcPosition: position);
+    size = Vector2(20, 20 * aspectRatio);
+    sprite = Sprite(image);
+    nativeAngle = math.pi / 2;
 
     moveEffect = MoveAlongPathEffect(
       game.path,
       EffectController(duration: game.pathLength / 100 * (100 / speed)),
       absolute: true,
       oriented: true,
+      onComplete: removeFromParent,
     );
 
     add(moveEffect);
@@ -105,8 +99,6 @@ abstract class Npc extends SpriteComponent with HasGameReference<MyGame>, Collis
       if (health < 0) {
         removeFromParent();
       }
-    } else if (other is! Person) {
-      debugPrint('Collision with $other');
     }
   }
 

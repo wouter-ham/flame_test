@@ -44,6 +44,7 @@ class MyGame extends FlameGame<MyWorld>
     debugMode = kDebugMode;
 
     path = Path()..moveTo(testPath.first.x, testPath.first.y);
+
     for (int i = 1; i < testPath.length; i++) {
       final Vector2 previousPoint = testPath[i - 1];
       final Vector2 currentPoint = testPath[i];
@@ -63,21 +64,10 @@ class MyGame extends FlameGame<MyWorld>
     camera.viewfinder.anchor = Anchor.topLeft;
 
     add(PlayArea());
-
     add(FpsComponent());
 
-    world.addAll(
-      List<Npc>.generate(
-        5,
-        (int index) => Person(position: testPath.first..add(Vector2.all(math.Random().nextInt(15).toDouble()))),
-      ),
-    );
-    world.addAll(
-      List<Npc>.generate(
-        5,
-        (int index) => Chopper(position: testPath.first..add(Vector2.all(math.Random().nextInt(15).toDouble()))),
-      ),
-    );
+    world.add(Person(position: testPath.first..add(Vector2.all(math.Random().nextInt(15).toDouble()))));
+    world.add(Chopper(position: testPath.first..add(Vector2.all(math.Random().nextInt(15).toDouble()))));
 
     world.add(Turret(position: (size / 2)..sub(Vector2.all(50)), strategy: TargetingStrategy.closest));
     // world.add(Sniper(position: size / 2, strategy: TargetingStrategy.flying));
