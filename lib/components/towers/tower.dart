@@ -26,6 +26,11 @@ abstract class Tower extends CircleComponent with HasWorldReference<MyWorld> {
       TargetingStrategy.closest => TargetingHelper.findClosestNpc(this, npcs.toList()),
       TargetingStrategy.weakest => TargetingHelper.findWeakest(this, npcs.toList()),
       TargetingStrategy.strongest => TargetingHelper.findStrongest(this, npcs.toList()),
+      TargetingStrategy.fastest => TargetingHelper.findFastest(this, npcs.toList()),
+      TargetingStrategy.furthestOnPath => TargetingHelper.findFurthestOnPath(this, npcs.toList()),
+      TargetingStrategy.flying => TargetingHelper.findWithFlyingPreference(this, npcs.toList()),
+      TargetingStrategy.ground => TargetingHelper.findWithGroundPreference(this, npcs.toList()),
+      TargetingStrategy.groups => throw UnimplementedError(),
     };
   }
 
