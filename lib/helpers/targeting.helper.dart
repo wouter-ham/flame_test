@@ -1,3 +1,4 @@
+import 'package:flame/components.dart';
 import 'package:flame_test/components/npc/npc.dart';
 import 'package:flame_test/components/towers/tower.dart';
 import 'package:flame_test/config.dart';
@@ -57,9 +58,9 @@ class TargetingHelper {
     final List<Npc> npcsInRange = filterInRange(tower, npcs)
       ..sort((Npc a, Npc b) => (b.progress ?? 1).compareTo(a.progress ?? 1));
 
-    npcs.forEach((Npc npc) {
+    for (final Npc npc in npcs) {
       print('${npc.travelType} ${npc.progress}');
-    });
+    }
 
     return npcsInRange.isEmpty ? null : npcsInRange.first;
   }
@@ -94,5 +95,31 @@ class TargetingHelper {
     }
 
     return flying.isEmpty ? null : flying.first;
+  }
+
+  static Npc? findGroupCenter(Tower tower, List<Npc> npcs) {
+    final List<Npc> npcsInRange = filterInRange(tower, npcs);
+
+    if (npcsInRange.isEmpty) {
+      return null;
+    }
+
+    final List<Vector2> positions = npcsInRange.map((Npc npc) => npc.position).toList();
+
+    if (positions.length == 1) {
+      return npcsInRange.first;
+    }
+
+    double sumX = 0;
+    double sumY = 0;
+    for (final Vector2 pos in positions) {
+      sumX += pos.x;
+      sumY += pos.y;
+    }
+    final Vector2 center = Vector2(sumX / positions.length, sumY / positions.length);
+
+    return npcsInRange.reduce(
+      (Npc a, Npc b) => (a.position.distanceTo(center) < b.position.distanceTo(center)) ? a : b,
+    );
   }
 }

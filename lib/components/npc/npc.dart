@@ -31,21 +31,6 @@ abstract class Npc extends SpriteComponent with HasGameReference<MyGame>, Collis
         children: <Component>[CircleHitbox()],
       );
 
-  Npc.random(Vector2 size)
-    : super(
-        anchor: Anchor.center,
-        paint:
-            Paint()
-              ..color = const Color(0xffa60827)
-              ..style = PaintingStyle.fill,
-        children: <Component>[CircleHitbox()],
-      ) {
-    position = Vector2(size.x * math.Random().nextDouble(), size.y * math.Random().nextDouble());
-    health = math.Random().nextInt(10) + 1;
-    speed = math.Random().nextInt(10).toDouble();
-    travelType = math.Random().nextBool() ? TravelType.flying : TravelType.ground;
-  }
-
   double? get progress {
     if (!moveEffect.isMounted) {
       return null;
@@ -113,7 +98,10 @@ abstract class Npc extends SpriteComponent with HasGameReference<MyGame>, Collis
         particle: Particle.generate(
           generator:
               (int i) => MovingParticle(
-                to: Vector2((math.Random().nextDouble() - .5) * 20, (math.Random().nextDouble() - .5) * 20),
+                to: Vector2(
+                  (math.Random().nextDouble() - .5) * Config.particleDistance,
+                  (math.Random().nextDouble() - .5) * Config.particleDistance,
+                ),
                 child: FadeOutParticle(radius: 2, paint: Paint()..color = Colors.red),
                 curve: Curves.easeOut,
                 lifespan: .2,
