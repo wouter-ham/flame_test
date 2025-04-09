@@ -30,6 +30,7 @@ abstract class Projectile extends CircleComponent with CollisionCallbacks {
   void update(double dt) {
     super.update(dt);
 
+    // TODO make projectile continue moving in its direction when the target is removed
     if (target.isRemoving || target.isRemoved) {
       removeFromParent();
       return;
