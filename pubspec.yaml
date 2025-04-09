@@ -1,5 +1,5 @@
-name: flame_test
-description: "A new Flutter project."
+name: tower_defense
+description: "A simple tower defense game written in Flutter Flame"
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
@@ -12,12 +12,14 @@ dependencies:
 
   cupertino_icons: ^1.0.8
   flame: ^1.25.0
+  flame_test: ^1.18.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
   flutter_lints: ^5.0.0
+  test: ^1.25.15
 
 flutter:
   uses-material-design: true

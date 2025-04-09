@@ -1,8 +1,8 @@
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
-import 'package:flame_test/components/index.dart';
-import 'package:flame_test/config.dart';
 import 'package:flutter/material.dart';
+import 'package:tower_defense/components/index.dart';
+import 'package:tower_defense/config.dart';
 
 abstract class Projectile extends CircleComponent with CollisionCallbacks {
   double speed;

@@ -1,9 +1,9 @@
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
-import 'package:flame_test/components/index.dart';
-import 'package:flame_test/config.dart';
-import 'package:flame_test/helpers/targeting.helper.dart';
-import 'package:flame_test/world.dart';
+import 'package:tower_defense/components/index.dart';
+import 'package:tower_defense/config.dart';
+import 'package:tower_defense/helpers/targeting.helper.dart';
+import 'package:tower_defense/world.dart';
 
 abstract class Tower extends CircleComponent with HasWorldReference<MyWorld> {
   final TargetingStrategy strategy;
@@ -30,7 +30,7 @@ abstract class Tower extends CircleComponent with HasWorldReference<MyWorld> {
       TargetingStrategy.furthestOnPath => TargetingHelper.findFurthestOnPath(this, npcs.toList()),
       TargetingStrategy.flying => TargetingHelper.findWithFlyingPreference(this, npcs.toList()),
       TargetingStrategy.ground => TargetingHelper.findWithGroundPreference(this, npcs.toList()),
-      TargetingStrategy.groups => throw UnimplementedError(),
+      TargetingStrategy.groups => TargetingHelper.findGroupCenter(this, npcs.toList()),
     };
   }
 

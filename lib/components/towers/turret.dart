@@ -1,8 +1,8 @@
 import 'dart:ui';
 
-import 'package:flame_test/components/npc/npc.dart';
-import 'package:flame_test/components/projectiles/bullet.dart';
-import 'package:flame_test/components/towers/index.dart';
+import 'package:tower_defense/components/npc/npc.dart';
+import 'package:tower_defense/components/projectiles/bullet.dart';
+import 'package:tower_defense/components/towers/index.dart';
 
 class Turret extends Tower {
   Turret({required super.position, required super.strategy})

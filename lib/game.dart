@@ -5,13 +5,10 @@ import 'dart:ui';
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flame/game.dart';
-import 'package:flame_test/components/index.dart';
-import 'package:flame_test/components/npc/chopper.dart';
-import 'package:flame_test/components/npc/person.dart';
-import 'package:flame_test/config.dart';
-import 'package:flame_test/world.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
+import 'package:tower_defense/components/index.dart';
+import 'package:tower_defense/world.dart';
 
 class MyGame extends FlameGame<MyWorld>
     with SingleGameInstance, HasPerformanceTracker, HasCollisionDetection<Broadphase<ShapeHitbox>> {
@@ -66,11 +63,11 @@ class MyGame extends FlameGame<MyWorld>
     add(PlayArea());
     add(FpsComponent());
 
-    world.add(Person(position: testPath.first..add(Vector2.all(math.Random().nextInt(15).toDouble()))));
-    world.add(Chopper(position: testPath.first..add(Vector2.all(math.Random().nextInt(15).toDouble()))));
-
-    world.add(Turret(position: (size / 2)..sub(Vector2.all(50)), strategy: TargetingStrategy.closest));
-    // world.add(Sniper(position: size / 2, strategy: TargetingStrategy.flying));
-    world.add(Sniper(position: (size / 2)..add(Vector2.all(50)), strategy: TargetingStrategy.furthestOnPath));
+    // world.add(Person(position: testPath.first..add(Vector2.all(math.Random().nextInt(15).toDouble()))));
+    // world.add(Chopper(position: testPath.first..add(Vector2.all(math.Random().nextInt(15).toDouble()))));
+    //
+    // world.add(Turret(position: (size / 2)..sub(Vector2.all(50)), strategy: TargetingStrategy.closest));
+    // // world.add(Sniper(position: size / 2, strategy: TargetingStrategy.flying));
+    // world.add(Sniper(position: (size / 2)..add(Vector2.all(50)), strategy: TargetingStrategy.furthestOnPath));
   }
 }

@@ -1,8 +1,8 @@
 import 'package:flame/game.dart';
-import 'package:flame_test/camera.dart';
-import 'package:flame_test/game.dart';
-import 'package:flame_test/world.dart';
 import 'package:flutter/material.dart';
+import 'package:tower_defense/camera.dart';
+import 'package:tower_defense/game.dart';
+import 'package:tower_defense/world.dart';
 
 void main() {
   runApp(

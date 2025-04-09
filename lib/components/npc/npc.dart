@@ -8,16 +8,16 @@ import 'package:flame/effects.dart';
 import 'package:flame/extensions.dart';
 import 'package:flame/flame.dart';
 import 'package:flame/particles.dart';
-import 'package:flame_test/components/index.dart';
-import 'package:flame_test/config.dart';
-import 'package:flame_test/game.dart';
-import 'package:flame_test/misc/index.dart';
 import 'package:flutter/material.dart';
+import 'package:tower_defense/components/index.dart';
+import 'package:tower_defense/config.dart';
+import 'package:tower_defense/game.dart';
+import 'package:tower_defense/misc/index.dart';
 
 abstract class Npc extends SpriteComponent with HasGameReference<MyGame>, CollisionCallbacks {
-  late final double speed;
   late final TravelType travelType;
   double health = 10;
+  double speed = 10;
 
   late final MoveAlongPathEffect moveEffect;
 
@@ -31,11 +31,7 @@ abstract class Npc extends SpriteComponent with HasGameReference<MyGame>, Collis
         children: <Component>[CircleHitbox()],
       );
 
-  double? get progress {
-    if (!moveEffect.isMounted) {
-      return null;
-    }
-
+  double get progress {
     return moveEffect.controller.progress;
   }
 

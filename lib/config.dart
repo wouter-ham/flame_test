@@ -2,6 +2,7 @@ class Config {
   static const double radius = 4;
   static const int gridSize = 25;
   static const int particleDistance = 25;
+  static const int maxGroupBoundary = 25;
 }
 
 enum TargetingStrategy {
