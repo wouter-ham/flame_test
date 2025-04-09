@@ -1,7 +1,8 @@
 #!/bin/sh
 
+### Flutter analyze
 result=$(fvm flutter analyze --no-fatal-infos --no-fatal-warnings)
-exitCode=$? # If the exitCode is zero, then command executed successfully.
+exitCode=$?
 
 if [ $exitCode  -ne 0 ]; then
   echo "$result"
@@ -12,17 +13,29 @@ echo "Finished running flutter analyze command."
 
 ################################################################
 
-# 2. Run `dart dry --apply` to auto-fix basic issues.
+### Flutter tests
+result=$(fvm flutter test)
+exitCode=$?
+
+if [ $exitCode  -ne 0 ]; then
+  echo "$result"
+  echo "Flutter tests failed"
+  exit 1
+fi
+echo "Finished running flutter test command."
+
+################################################################
+
+### Dart fix
 result=$(fvm dart fix --apply)
 exitCode=$?
 
-# Adding the files updated by `dart fix` command to git.
 git add .
 
 echo "$result"
 
 if [ $exitCode -ne 0 ]; then
-  echo "dart fix command failed to execute."
+  echo "Dart fix command failed to execute."
   exit 1
 fi
 echo "Finished running dart fix command."
