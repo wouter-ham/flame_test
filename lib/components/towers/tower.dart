@@ -13,10 +13,10 @@ abstract class Tower extends CircleComponent with HasWorldReference<MyWorld> {
 
   Tower({
     required super.position,
-    required this.strategy,
     required this.fireInterval,
     required this.range,
     required super.paint,
+    this.strategy = TargetingStrategy.furthestOnPath,
   }) : super(radius: Config.radius, anchor: Anchor.center, children: <Component>[CircleHitbox()]);
 
   Npc? getTarget() {
@@ -40,6 +40,7 @@ abstract class Tower extends CircleComponent with HasWorldReference<MyWorld> {
       lastFire += dt;
       return;
     }
+
     lastFire = 0;
     fire();
   }

@@ -1,7 +1,6 @@
 import 'package:flame/game.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:tower_defense/components/index.dart';
-import 'package:tower_defense/components/npc/index.dart';
 import 'package:tower_defense/config.dart';
 import 'package:tower_defense/helpers/index.dart';
 

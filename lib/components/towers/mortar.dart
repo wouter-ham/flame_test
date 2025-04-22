@@ -1,15 +1,16 @@
 import 'dart:ui';
 
 import 'package:tower_defense/components/index.dart';
+import 'package:tower_defense/config.dart';
 
-class Sniper extends Tower {
-  Sniper({required super.position, super.strategy})
+class Mortar extends Tower {
+  Mortar({required super.position, super.strategy = TargetingStrategy.groups})
     : super(
         fireInterval: 5,
-        range: null,
+        range: 150,
         paint:
             Paint()
-              ..color = const Color(0xff00d9de)
+              ..color = const Color(0xffff0000)
               ..style = PaintingStyle.fill,
       );
 
@@ -21,6 +22,6 @@ class Sniper extends Tower {
       return;
     }
 
-    world.add(Bullet(position: position, target: target, damage: 5));
+    world.add(Bomb(position: position, target: target));
   }
 }

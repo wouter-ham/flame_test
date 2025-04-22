@@ -8,8 +8,6 @@ import 'package:flame/game.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:tower_defense/components/index.dart';
-import 'package:tower_defense/components/npc/index.dart';
-import 'package:tower_defense/config.dart';
 import 'package:tower_defense/world.dart';
 
 class MyGame extends FlameGame<MyWorld>
@@ -68,8 +66,8 @@ class MyGame extends FlameGame<MyWorld>
     world.add(Person(position: testPath.first..add(Vector2.all(math.Random().nextInt(15).toDouble()))));
     world.add(Chopper(position: testPath.first..add(Vector2.all(math.Random().nextInt(15).toDouble()))));
 
-    world.add(Turret(position: (size / 2)..sub(Vector2.all(50)), strategy: TargetingStrategy.closest));
-    world.add(Sniper(position: size / 2, strategy: TargetingStrategy.flying));
-    world.add(Sniper(position: (size / 2)..add(Vector2.all(50)), strategy: TargetingStrategy.furthestOnPath));
+    world.add(Turret(position: (size / 2)..sub(Vector2.all(50))));
+    world.add(Sniper(position: (size / 2)..add(Vector2.all(50))));
+    world.add(Mortar(position: (size / 2)..add(Vector2.all(100))));
   }
 }

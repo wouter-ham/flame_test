@@ -7,16 +7,16 @@ import 'package:tower_defense/config.dart';
 abstract class Projectile extends CircleComponent with CollisionCallbacks {
   double speed;
   double damage;
+  double? splashRange;
   Npc target;
-  TargetingStrategy strategy;
 
   Projectile({
     required super.position,
     required this.speed,
     required this.damage,
     required this.target,
+    this.splashRange,
     super.radius = Config.radius,
-    this.strategy = TargetingStrategy.closest,
   }) : super(
          anchor: Anchor.center,
          paint:

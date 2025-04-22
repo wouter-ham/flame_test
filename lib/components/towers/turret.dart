@@ -1,11 +1,9 @@
 import 'dart:ui';
 
-import 'package:tower_defense/components/npc/npc.dart';
-import 'package:tower_defense/components/projectiles/bullet.dart';
-import 'package:tower_defense/components/towers/index.dart';
+import 'package:tower_defense/components/index.dart';
 
 class Turret extends Tower {
-  Turret({required super.position, required super.strategy})
+  Turret({required super.position, super.strategy})
     : super(
         fireInterval: 2,
         range: 200,
