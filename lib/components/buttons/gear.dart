@@ -26,7 +26,7 @@ class GearShapeComponent extends PositionComponent {
       final RectangleComponent tooth = RectangleComponent(
         size: toothSize,
         paint: gearPaint,
-        anchor: Anchor.center,
+        anchor: .center,
         position: centerPosition + Vector2(cos(angle), sin(angle)) * (size.x / 2.5),
         angle: angle,
       );
@@ -36,7 +36,7 @@ class GearShapeComponent extends PositionComponent {
 }
 
 class SettingsIcon extends PositionComponent with TapCallbacks, HasGameReference<MyGame> {
-  SettingsIcon() : super(size: Vector2.all(40), priority: 99);
+  SettingsIcon() : super(size: .all(40), priority: 99);
 
   @override
   Future<void> onLoad() async {
@@ -44,13 +44,13 @@ class SettingsIcon extends PositionComponent with TapCallbacks, HasGameReference
       CircleComponent(
         radius: size.x / 2,
         paint: Paint()..color = Colors.grey.shade700,
-        anchor: Anchor.center,
+        anchor: .center,
         position: size / 2,
       ),
     );
 
     final GearShapeComponent gear = GearShapeComponent(size: size * 0.7);
-    gear.anchor = Anchor.center;
+    gear.anchor = .center;
     gear.position = size / 2;
     add(gear);
   }

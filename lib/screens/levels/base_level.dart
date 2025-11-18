@@ -64,7 +64,7 @@ abstract class BaseLevel extends Component with HasGameReference<MyGame> {
     add(
       SettingsIcon()
         ..position = Vector2(size.x - 30, 30)
-        ..anchor = Anchor.topRight
+        ..anchor = .topRight
         ..priority = 99,
     );
 

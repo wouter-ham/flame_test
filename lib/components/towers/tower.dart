@@ -16,7 +16,7 @@ abstract class Tower extends CircleComponent {
     required this.range,
     required super.paint,
     this.strategy = TargetingStrategy.furthestOnPath,
-  }) : super(radius: Config.radius, anchor: Anchor.center, children: <Component>[CircleHitbox()]);
+  }) : super(radius: Config.radius, anchor: .center, children: <Component>[CircleHitbox()]);
 
   Npc? getTarget() {
     final Iterable<Npc> npcs = children.query<Npc>();

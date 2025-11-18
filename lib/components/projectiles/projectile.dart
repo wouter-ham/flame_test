@@ -18,11 +18,10 @@ abstract class Projectile extends CircleComponent with CollisionCallbacks {
     this.splashRange,
     super.radius = Config.radius,
   }) : super(
-         anchor: Anchor.center,
-         paint:
-             Paint()
-               ..color = const Color(0xff1e6091)
-               ..style = PaintingStyle.fill,
+         anchor: .center,
+         paint: Paint()
+           ..color = const Color(0xff1e6091)
+           ..style = .fill,
          children: <Component>[CircleHitbox()],
        );
 

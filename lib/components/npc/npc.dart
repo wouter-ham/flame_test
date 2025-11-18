@@ -43,8 +43,8 @@ abstract class Npc extends PositionComponent with CollisionCallbacks {
     this.spriteHeight = 64,
     this.spriteWidth = 48,
   }) : super(
-         anchor: Anchor.center,
-         children: <Component>[CircleHitbox(anchor: Anchor.center)],
+         anchor: .center,
+         children: <Component>[CircleHitbox(anchor: .center)],
        );
 
   double get progress {
@@ -64,7 +64,7 @@ abstract class Npc extends PositionComponent with CollisionCallbacks {
     final double aspectRatio = image.height / image.width;
 
     size = Vector2(20, 20 * aspectRatio);
-    anchor = Anchor.center;
+    anchor = .center;
 
     _currentRow = AssetHelper().getRow(currentAngle);
 
@@ -73,7 +73,7 @@ abstract class Npc extends PositionComponent with CollisionCallbacks {
       animation: characterAnimation,
       size: Vector2(spriteWidth, spriteHeight),
       position: position,
-      anchor: Anchor.center,
+      anchor: .center,
     );
 
     add(animationComponent);
@@ -145,9 +145,9 @@ abstract class Npc extends PositionComponent with CollisionCallbacks {
 
     add(
       ParticleSystemComponent(
-        anchor: Anchor.topLeft,
+        anchor: .topLeft,
         position: position,
-        particle: Particle.generate(
+        particle: .generate(
           generator: (int i) => MovingParticle(
             to: Vector2(
               (math.Random().nextDouble() - .5) * Config.particleDistance,

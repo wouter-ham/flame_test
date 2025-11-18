@@ -35,17 +35,17 @@ class RoadPathVisualizer extends Component {
        _dashGap = dashGap {
     _borderPaint = Paint()
       ..color = borderColor
-      ..style = PaintingStyle.stroke
+      ..style = .stroke
       ..strokeWidth = roadWidth + (borderWidth * 2)
-      ..strokeJoin = StrokeJoin.round;
+      ..strokeJoin = .round;
     _roadPaint = Paint()
       ..color = roadColor
-      ..style = PaintingStyle.stroke
+      ..style = .stroke
       ..strokeWidth = roadWidth
-      ..strokeJoin = StrokeJoin.round;
+      ..strokeJoin = .round;
     _centerlinePaint = Paint()
       ..color = centerlineColor
-      ..style = PaintingStyle.stroke
+      ..style = .stroke
       ..strokeWidth = centerlineWidth;
   }
 

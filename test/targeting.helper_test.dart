@@ -1,7 +1,6 @@
 import 'package:flame/game.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:tower_defense/components/index.dart';
-import 'package:tower_defense/config.dart';
 import 'package:tower_defense/helpers/index.dart';
 
 void main() {
@@ -44,7 +43,7 @@ void main() {
     ];
 
     test('Filter in range', () {
-      final Turret turret = Turret(position: position, strategy: TargetingStrategy.closest);
+      final Turret turret = Turret(position: position, strategy: .closest);
 
       final List<Npc> inRange = TargetingHelper.filterInRange(turret, npcs);
 
@@ -62,7 +61,7 @@ void main() {
     });
 
     test('Closest', () {
-      final Turret turret = Turret(position: position, strategy: TargetingStrategy.closest);
+      final Turret turret = Turret(position: position, strategy: .closest);
 
       final Npc? closest = TargetingHelper.findClosestNpc(turret, npcs);
 
@@ -70,7 +69,7 @@ void main() {
     });
 
     test('Weakest', () {
-      final Sniper sniper = Sniper(position: position, strategy: TargetingStrategy.weakest);
+      final Sniper sniper = Sniper(position: position, strategy: .weakest);
 
       final Npc? weakest = TargetingHelper.findWeakest(sniper, npcs.toList());
 
@@ -78,7 +77,7 @@ void main() {
     });
 
     test('Strongest', () {
-      final Sniper sniper = Sniper(position: position, strategy: TargetingStrategy.strongest);
+      final Sniper sniper = Sniper(position: position, strategy: .strongest);
 
       final Npc? strongest = TargetingHelper.findStrongest(sniper, npcs.toList());
 
@@ -86,7 +85,7 @@ void main() {
     });
 
     test('Fastest', () {
-      final Sniper sniper = Sniper(position: position, strategy: TargetingStrategy.fastest);
+      final Sniper sniper = Sniper(position: position, strategy: .fastest);
 
       final Npc? fastest = TargetingHelper.findFastest(sniper, npcs.toList());
 
@@ -94,7 +93,7 @@ void main() {
     });
 
     test('Fastest flyer', () {
-      final Sniper sniper = Sniper(position: position, strategy: TargetingStrategy.flying);
+      final Sniper sniper = Sniper(position: position, strategy: .flying);
 
       final Npc? flyer = TargetingHelper.findWithFlyingPreference(sniper, npcs.toList());
 
@@ -102,7 +101,7 @@ void main() {
     });
 
     test('Fastest grounded', () {
-      final Sniper sniper = Sniper(position: position, strategy: TargetingStrategy.ground);
+      final Sniper sniper = Sniper(position: position, strategy: .ground);
 
       final Npc? grounded = TargetingHelper.findWithGroundPreference(sniper, npcs.toList());
 
@@ -110,7 +109,7 @@ void main() {
     });
 
     test('Group center', () {
-      final Sniper sniper = Sniper(position: position, strategy: TargetingStrategy.ground);
+      final Sniper sniper = Sniper(position: position, strategy: .ground);
 
       final Npc? group = TargetingHelper.findGroupCenter(sniper, npcs.toList());
 
@@ -118,7 +117,7 @@ void main() {
     });
 
     // testWithGame<MyGame>('Furthest on path', () => MyGame(world: MyWorld(), camera: MyCamera()), (MyGame game) async {
-    //   final Turret turret = Turret(position: position, strategy: TargetingStrategy.furthestOnPath);
+    //   final Turret turret = Turret(position: position, strategy: .furthestOnPath);
     //
     //   await game.world.add(turret);
     //   await game.world.addAll(npcs);

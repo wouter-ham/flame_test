@@ -18,7 +18,7 @@ class HomePage extends BaseScreen {
       TextComponent<TextPaint>(
         text: 'Tap to go to Level Selector',
         position: Vector2(size.x / 2, size.y / 2),
-        anchor: Anchor.center,
+        anchor: .center,
         textRenderer: TextPaint(style: const TextStyle(color: Colors.white, fontSize: 16)),
       ),
     );

@@ -12,14 +12,14 @@ abstract class BaseScreen extends PositionComponent with TapCallbacks, HasGameRe
   Future<void> onLoad() async {
     size = game.size;
 
-    anchor = Anchor.topLeft;
+    anchor = .topLeft;
 
     // add(RectangleComponent(size: size, position: Vector2(0, 0), paint: Paint()..color = const Color(0xFF3B4D5D)));
 
     add(
       SettingsIcon()
         ..position = Vector2(size.x - 30, 30)
-        ..anchor = Anchor.center,
+        ..anchor = .center,
     );
   }
 }

@@ -13,7 +13,7 @@ class MyGame extends FlameGame<MyWorld>
   double get width => size.x;
   double get height => size.y;
 
-  final TextStyle style = TextStyle(color: BasicPalette.white.color, fontSize: 32, fontWeight: FontWeight.bold);
+  final TextStyle style = TextStyle(color: BasicPalette.white.color, fontSize: 32, fontWeight: .bold);
 
   late final RouterComponent router;
 

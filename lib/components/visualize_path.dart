@@ -10,7 +10,7 @@ class PathVisualizer extends Component {
           paint ??
           (Paint()
             ..color = color
-            ..style = PaintingStyle.stroke
+            ..style = .stroke
             ..strokeWidth = strokeWidth);
 
   @override

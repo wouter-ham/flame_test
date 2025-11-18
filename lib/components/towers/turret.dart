@@ -9,7 +9,7 @@ class Turret extends Tower {
         range: 200,
         paint: Paint()
           ..color = const Color(0xff2da100)
-          ..style = PaintingStyle.fill,
+          ..style = .fill,
       );
 
   @override

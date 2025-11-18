@@ -52,25 +52,24 @@ class TargetingHelper {
 
   // Not testable because the moveEffect is not started
   static Npc? findFurthestOnPath(Tower tower, List<Npc> npcs) {
-    final List<Npc> npcsInRange = filterInRange(tower, npcs)..sort((Npc a, Npc b) {
-      return b.progress.compareTo(a.progress);
-    });
+    final List<Npc> npcsInRange = filterInRange(tower, npcs)
+      ..sort((Npc a, Npc b) {
+        return b.progress.compareTo(a.progress);
+      });
 
     return npcsInRange.isEmpty ? null : npcsInRange.first;
   }
 
   static Npc? findWithFlyingPreference(Tower tower, List<Npc> npcs) {
     final List<Npc> npcsInRange = filterInRange(tower, npcs);
-    final List<Npc> flying =
-        npcsInRange
-          ..where((Npc npc) => npc.travelType == TravelType.flying)
-          ..toList()
-          ..sort((Npc a, Npc b) => b.speed.compareTo(a.speed));
-    final List<Npc> ground =
-        npcsInRange
-          ..where((Npc npc) => npc.travelType == TravelType.ground)
-          ..toList()
-          ..sort((Npc a, Npc b) => b.speed.compareTo(a.speed));
+    final List<Npc> flying = npcsInRange
+      ..where((Npc npc) => npc.travelType == .flying)
+      ..toList()
+      ..sort((Npc a, Npc b) => b.speed.compareTo(a.speed));
+    final List<Npc> ground = npcsInRange
+      ..where((Npc npc) => npc.travelType == .ground)
+      ..toList()
+      ..sort((Npc a, Npc b) => b.speed.compareTo(a.speed));
 
     if (flying.isNotEmpty) {
       return flying.first;
@@ -81,12 +80,10 @@ class TargetingHelper {
 
   static Npc? findWithGroundPreference(Tower tower, List<Npc> npcs) {
     final List<Npc> npcsInRange = filterInRange(tower, npcs);
-    final List<Npc> flying =
-        npcsInRange.where((Npc npc) => npc.travelType == TravelType.flying).toList()
-          ..sort((Npc a, Npc b) => b.speed.compareTo(a.speed));
-    final List<Npc> ground =
-        npcsInRange.where((Npc npc) => npc.travelType == TravelType.ground).toList()
-          ..sort((Npc a, Npc b) => b.speed.compareTo(a.speed));
+    final List<Npc> flying = npcsInRange.where((Npc npc) => npc.travelType == .flying).toList()
+      ..sort((Npc a, Npc b) => b.speed.compareTo(a.speed));
+    final List<Npc> ground = npcsInRange.where((Npc npc) => npc.travelType == .ground).toList()
+      ..sort((Npc a, Npc b) => b.speed.compareTo(a.speed));
 
     if (ground.isNotEmpty) {
       return ground.first;

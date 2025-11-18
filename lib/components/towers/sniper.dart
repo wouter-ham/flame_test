@@ -9,7 +9,7 @@ class Sniper extends Tower {
         range: null,
         paint: Paint()
           ..color = const Color(0xff00d9de)
-          ..style = PaintingStyle.fill,
+          ..style = .fill,
       );
 
   @override
