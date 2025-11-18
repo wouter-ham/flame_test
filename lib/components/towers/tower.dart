@@ -3,9 +3,8 @@ import 'package:flame/components.dart';
 import 'package:tower_defense/components/index.dart';
 import 'package:tower_defense/config.dart';
 import 'package:tower_defense/helpers/targeting.helper.dart';
-import 'package:tower_defense/world.dart';
 
-abstract class Tower extends CircleComponent with HasWorldReference<MyWorld> {
+abstract class Tower extends CircleComponent {
   final TargetingStrategy strategy;
   final double fireInterval;
   final double? range;
@@ -20,7 +19,7 @@ abstract class Tower extends CircleComponent with HasWorldReference<MyWorld> {
   }) : super(radius: Config.radius, anchor: Anchor.center, children: <Component>[CircleHitbox()]);
 
   Npc? getTarget() {
-    final Iterable<Npc> npcs = world.children.query<Npc>();
+    final Iterable<Npc> npcs = children.query<Npc>();
 
     return switch (strategy) {
       TargetingStrategy.closest => TargetingHelper.findClosestNpc(this, npcs.toList()),

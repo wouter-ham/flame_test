@@ -17,26 +17,19 @@ class AssetHelper {
     const double slice = math.pi / 8;
 
     if (angle > slice * 15 || angle <= slice * 3) {
-      print('0');
       return up;
     } else if (angle > slice * 3 && angle <= slice * 5) {
-      print('1');
       return right;
     } else if (angle > slice * 5 && angle <= slice * 9) {
-      print('2');
       return down;
     } else if (angle > slice * 9 && angle <= slice * 11) {
-      print('3');
       return left;
     } else if (angle > slice * 11 && angle <= slice * 13) {
-      print('4');
       return left;
     } else if (angle > slice * 13 && angle <= slice * 15) {
-      print('5');
       return right;
     }
 
-    print('6');
     return down;
   }
 }

@@ -1,9 +1,15 @@
+import 'dart:async';
+
 import 'package:flame/components.dart';
 import 'package:flame/text.dart';
+import 'package:tower_defense/game.dart';
 
-class MyWorld extends World {
+class MyWorld extends World with HasGameReference<MyGame> {
   @override
-  Future<void> onLoad() async {
-    add(FpsTextComponent<TextRenderer>());
+  FutureOr<void> onLoad() {
+    super.onLoad();
+
+    add(FpsComponent());
+    add(FpsTextComponent<TextRenderer>()..priority = 999);
   }
 }

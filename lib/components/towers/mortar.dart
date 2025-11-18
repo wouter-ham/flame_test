@@ -8,10 +8,9 @@ class Mortar extends Tower {
     : super(
         fireInterval: 5,
         range: 150,
-        paint:
-            Paint()
-              ..color = const Color(0xffff0000)
-              ..style = PaintingStyle.fill,
+        paint: Paint()
+          ..color = const Color(0xffff0000)
+          ..style = PaintingStyle.fill,
       );
 
   @override
@@ -22,6 +21,6 @@ class Mortar extends Tower {
       return;
     }
 
-    world.add(Bomb(position: position, target: target));
+    add(Bomb(position: position, target: target));
   }
 }

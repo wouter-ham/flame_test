@@ -7,10 +7,9 @@ class Sniper extends Tower {
     : super(
         fireInterval: 5,
         range: null,
-        paint:
-            Paint()
-              ..color = const Color(0xff00d9de)
-              ..style = PaintingStyle.fill,
+        paint: Paint()
+          ..color = const Color(0xff00d9de)
+          ..style = PaintingStyle.fill,
       );
 
   @override
@@ -21,6 +20,6 @@ class Sniper extends Tower {
       return;
     }
 
-    world.add(Bullet(position: position, target: target, damage: 5));
+    add(Bullet(position: position, target: target, damage: 5));
   }
 }

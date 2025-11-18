@@ -7,10 +7,9 @@ class Turret extends Tower {
     : super(
         fireInterval: 2,
         range: 200,
-        paint:
-            Paint()
-              ..color = const Color(0xff2da100)
-              ..style = PaintingStyle.fill,
+        paint: Paint()
+          ..color = const Color(0xff2da100)
+          ..style = PaintingStyle.fill,
       );
 
   @override
@@ -21,6 +20,6 @@ class Turret extends Tower {
       return;
     }
 
-    world.add(Bullet(position: position, target: target));
+    add(Bullet(position: position, target: target));
   }
 }

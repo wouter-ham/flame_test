@@ -11,11 +11,11 @@ import 'package:flame/sprite.dart';
 import 'package:flutter/material.dart';
 import 'package:tower_defense/components/index.dart';
 import 'package:tower_defense/config.dart';
-import 'package:tower_defense/game.dart';
 import 'package:tower_defense/helpers/asset.helper.dart';
 import 'package:tower_defense/misc/index.dart';
+import 'package:tower_defense/screens/levels/base_level.dart';
 
-abstract class Npc extends PositionComponent with HasGameReference<MyGame>, CollisionCallbacks {
+abstract class Npc extends PositionComponent with CollisionCallbacks {
   late SpriteSheet spriteSheet;
   final TravelType travelType;
   final String asset;
@@ -53,6 +53,8 @@ abstract class Npc extends PositionComponent with HasGameReference<MyGame>, Coll
 
   @override
   Future<void> onLoad() async {
+    super.onLoad();
+
     final ui.Image image = await Flame.images.load(asset);
 
     final Vector2 spriteSize = Vector2(spriteWidth, spriteHeight);
@@ -78,17 +80,21 @@ abstract class Npc extends PositionComponent with HasGameReference<MyGame>, Coll
 
     nativeAngle = math.pi / 2;
 
+    final BaseLevel? level = findParent<BaseLevel>();
+
+    if (level == null) {
+      return;
+    }
+
     moveEffect = MoveAlongPathEffect(
-      game.path,
-      EffectController(duration: game.pathLength / 100 * (100 / speed)),
+      level.smoothPath,
+      EffectController(duration: level.pathLength / 100 * (100 / speed)),
       absolute: true,
       onComplete: removeFromParent,
       // oriented: true,
     );
 
     add(moveEffect);
-
-    return super.onLoad();
   }
 
   @override
@@ -113,8 +119,6 @@ abstract class Npc extends PositionComponent with HasGameReference<MyGame>, Coll
     final int newRow = AssetHelper().getRow(currentAngle);
 
     if (_currentRow != newRow) {
-      print('angle: $currentAngle');
-      print('Changing row from $_currentRow to $newRow');
       final SpriteAnimation newAnimation = spriteSheet.createAnimation(row: newRow, stepTime: .1);
 
       animationComponent.animation = newAnimation;
@@ -139,7 +143,7 @@ abstract class Npc extends PositionComponent with HasGameReference<MyGame>, Coll
   void onRemove() {
     super.onRemove();
 
-    game.world.add(
+    add(
       ParticleSystemComponent(
         anchor: Anchor.topLeft,
         position: position,
